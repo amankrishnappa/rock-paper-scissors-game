@@ -1,0 +1,123 @@
+//html css code
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    #header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #game-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    #options-container {
+      display: flex;
+      justify-content: space-between;
+      width: 400px;
+    }
+
+    .option {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px #ccc;
+      cursor: pointer;
+      padding: 20px;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+
+    .option:hover {
+      box-shadow: 0px 0px 15px #999;
+    }
+
+    .option img {
+      max-width: 100%;
+    }
+
+    #result-container {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    #result-message {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>Rock Paper Scissors Game</h1>
+  </div>
+  <div id="game-container">
+    <div id="options-container">
+      <div class="option" data-option="rock">
+        <img src="rock.png" alt="Rock">
+      </div>
+      <div class="option" data-option="paper">
+        <img src="paper.png" alt="Paper">
+      </div>
+      <div class="option" data-option="scissors">
+        <img src="scissors.png" alt="Scissors">
+      </div>
+    </div>
+  </div>
+  <div id="result-container">
+    <div id="result-message"></div>
+    <button id="play-again-button">Play Again</button>
+  </div>
+  <script src="rock-paper-scissors-app.js"></script>
+</body>
+</html>
+
+
+//javascript code
+nst options = document.querySelectorAll('.option');
+const resultMessage = document.getElementById('result-message');
+const playAgainButton = document.getElementById('play-again-button');
+
+let playerChoice, computerChoice;
+
+options.forEach(option => option.addEventListener('click', playGame));
+playAgainButton.addEventListener('click', resetGame);
+
+function playGame() {
+  playerChoice = this.dataset.option;
+  computerChoice = getComputerChoice();
+  showChoices(playerChoice, computerChoice);
+  const result = getResult(playerChoice, computerChoice);
+  showResult(result);
+}
+
+function getComputerChoice() {
+  const choices = ['rock', 'paper', 'scissors'];
+  const randomIndex = Math.floor(Math.random() * choices.length);
+  return choices[randomIndex];
+}
+
+function showChoices(playerChoice, computerChoice) {
+  options.forEach(option => {
+    if (option.dataset.option === playerChoice) {
+      option.classList.add('selected');
+    } else {
+      option.classList.remove('selected');
+    }
+  });
+  setTimeout(() => {
+    options.forEach(option => {
+      if (option.dataset.option === computerChoice) {
+        optionco
